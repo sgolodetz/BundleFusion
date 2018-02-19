@@ -107,11 +107,10 @@ s_streamingPos = 0.0f 0.0f 3.0f 1.0f; // Depends on DepthMin and DepthMax
 s_streamingOutParts = 80;	// number of frames required to sweep through the entire hash
 
 //recording of the input data
-s_recordData = false;			// master flag for data recording: enables or disables data recording
-s_recordCompression = true;		//if recoding is enabled; then compression is used (.sens instead of .sensor)
+s_recordData = true;			// master flag for data recording: enables or disables data recording
+s_recordCompression = false;	//if recoding is enabled; then compression is used (.sens instead of .sensor)
 s_recordDataWidth = 640;		//only applies to the non compressed version (see RGBDSensor.cpp)
 s_recordDataHeight = 480;		//only applies to the non compressed version (see RGBDSensor.cpp)
 s_recordDataFile = "dump/recording.sens";
 s_reconstructionEnabled = true;
-
-
+s_saveForInfiniTAM = true;
