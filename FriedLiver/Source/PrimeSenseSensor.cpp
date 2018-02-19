@@ -52,7 +52,12 @@ void PrimeSenseSensor::createFirstConnected()
 	std::cout << "After initialization: " << openni::OpenNI::getExtendedError() << std::endl;
 
 	// Create Device
+#if 0
 	rc = m_device.open("../data/readingroom.oni");//m_device.open(deviceURI);
+#else
+  // SMG
+  rc = m_device.open(deviceURI);
+#endif
 	if (rc != openni::STATUS_OK)
 	{
 		std::cout << "Device open failed: " << openni::OpenNI::getExtendedError() << std::endl;
@@ -156,6 +161,11 @@ void PrimeSenseSensor::createFirstConnected()
 	//t[0] /= 1000.0f; t[1] /= 1000.0f; t[2] /= 1000.0f;
 	//
 	//initializeDepthExtrinsics(R, t);
+}
+
+std::string PrimeSenseSensor::getSensorName() const
+{
+  return "PrimeSenseSensor";
 }
 
 bool PrimeSenseSensor::processDepth()

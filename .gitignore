@@ -1,0 +1,8 @@
+*.opensdf
+*.pdb
+*.sdf
+*.suo
+*.vcxproj.user
+ipch/
+x64/
+FriedLiver/CompiledShaders/

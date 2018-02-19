@@ -1,1 +1,1 @@
-x64\Release\FriedLiver zParametersDefault.txt zParametersBundlingDefault.txt
+x64\Debug\FriedLiver zParametersDefault.txt zParametersBundlingDefault.txt

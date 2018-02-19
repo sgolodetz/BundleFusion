@@ -28,6 +28,8 @@ public:
 	//! Initializes the sensor
 	void createFirstConnected();
 
+	virtual std::string getSensorName() const;
+
 	//! Processes the depth data (and color)
 	bool processDepth();
 	
