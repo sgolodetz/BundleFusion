@@ -188,6 +188,7 @@
     <ClInclude Include="Source\GlobalBundlingState.h" />
     <ClInclude Include="Source\GlobalDefines.h" />
     <ClInclude Include="Source\ImageHelper.h" />
+    <ClInclude Include="Source\ITMSequenceReader.h" />
     <ClInclude Include="Source\KinectOneSensor.h" />
     <ClInclude Include="Source\KinectSensor.h" />
     <ClInclude Include="Source\mLib.h" />
@@ -299,6 +300,7 @@
     </ClCompile>
     <ClCompile Include="Source\FriedLiver.cpp" />
     <ClCompile Include="Source\GlobalAppState.cpp" />
+    <ClCompile Include="Source\ITMSequenceReader.cpp" />
     <ClCompile Include="Source\KinectOneSensor.cpp" />
     <ClCompile Include="Source\KinectSensor.cpp" />
     <ClCompile Include="Source\mLib.cpp">

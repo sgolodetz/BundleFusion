@@ -56,8 +56,8 @@ void PrimeSenseSensor::createFirstConnected()
 	rc = m_device.open("../data/readingroom.oni");//m_device.open(deviceURI);
 #else
   // SMG
-  //rc = m_device.open(deviceURI);
-  rc = m_device.open("Lab.oni");
+  rc = m_device.open(deviceURI);
+  //rc = m_device.open("Lab.oni");
   m_device.setDepthColorSyncEnabled(true);
 #endif
 	if (rc != openni::STATUS_OK)

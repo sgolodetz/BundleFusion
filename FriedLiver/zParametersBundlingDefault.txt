@@ -2,7 +2,7 @@
 
 s_verbose = false;
 
-s_erodeSIFTdepth = true;
+s_erodeSIFTdepth = false;
 s_sendUplinkFeedbackImage = true;
 
 s_recordSolverConvergence = false;

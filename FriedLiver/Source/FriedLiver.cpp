@@ -96,6 +96,10 @@ RGBDSensor* getRGBDSensor()
 		throw MLIB_EXCEPTION("Requires STRUCTURE_SENSOR macro");
 #endif
 	}
+  if (GlobalAppState::get().s_sensorIdx == 9) {
+    g_sensor = new ITMSequenceReader;
+    return g_sensor;
+  }
 
 	throw MLIB_EXCEPTION("unkown sensor id " + std::to_string(GlobalAppState::get().s_sensorIdx));
 

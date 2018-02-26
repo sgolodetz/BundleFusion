@@ -1,5 +1,5 @@
-// 0=Kinect; 1=PrimeSense; 2=KinectOne; 3=BinaryDumpReader; 4=NetworkSensor; 5=IntelSensor; 6=RealSense; 7=StructureSensor; 8=SensorDataReader (for offline processing)
-s_sensorIdx = 1;
+// 0=Kinect; 1=PrimeSense; 2=KinectOne; 3=BinaryDumpReader; 4=NetworkSensor; 5=IntelSensor; 6=RealSense; 7=StructureSensor; 8=SensorDataReader (for offline processing); 9=ITMSequenceReader
+s_sensorIdx = 9;
 
 s_numSolveFramesBeforeExit = 30;//-1 //#frames to run after solve done, then saves and exits; -1 to stop after no more reintegration ops
 
@@ -114,3 +114,15 @@ s_recordDataHeight = 480;		//only applies to the non compressed version (see RGB
 s_recordDataFile = "dump/recording.sens";
 s_reconstructionEnabled = true;
 s_saveForInfiniTAM = true;
+
+// ITMSequenceReader parameters
+//s_itmDepthImageMask = "frame-%06i.depth.png"
+s_itmDepthImageMask = "depthm%06i.pgm"
+s_itmInitialFrameNo = 0
+//s_itmPoseFileMask = "frame-%06i.pose.txt"
+s_itmPoseFileMask = "posem%06i.txt"
+//s_itmRgbImageMask = "frame-%06i.color.png"
+s_itmRgbImageMask = "rgbm%06i.ppm"
+s_itmSequenceDir = "E:/mamlDataset/sequences/Flat/turret2sittingroom_resized"
+//s_itmSequenceDir = "C:/spaint/build/bin/apps/spaintgui/sequences/Maml3"
+s_itmUsePoses = true

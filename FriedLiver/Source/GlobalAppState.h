@@ -102,7 +102,13 @@
 	X(mat4f, s_topVideoTransformWorld) \
 	X(vec4f, s_topVideoCameraPose) \
 	X(vec2f, s_topVideoMinMax) \
-	X(unsigned int, s_numSolveFramesBeforeExit)
+	X(unsigned int, s_numSolveFramesBeforeExit) \
+  X(std::string, s_itmDepthImageMask) \
+  X(int, s_itmInitialFrameNo) \
+  X(std::string, s_itmPoseFileMask) \
+  X(std::string, s_itmRgbImageMask) \
+  X(std::string, s_itmSequenceDir) \
+  X(bool, s_itmUsePoses)
 
 
 #ifndef VAR_NAME

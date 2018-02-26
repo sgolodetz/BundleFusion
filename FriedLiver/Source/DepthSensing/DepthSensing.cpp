@@ -1025,7 +1025,7 @@ void CALLBACK OnD3D11FrameRender(ID3D11Device* pd3dDevice, ID3D11DeviceContext* 
 	bool validTransform = true; bool bGlobalTrackingLost = false;
 	if (bGotDepth) {
 		mat4f transformation = mat4f::zero();
-		unsigned int frameIdx;
+		unsigned int frameIdx = -1;
 		validTransform = g_depthSensingBundler->getCurrentIntegrationFrame(transformation, frameIdx, bGlobalTrackingLost);
 #ifdef RUN_MULTITHREADED
 		//allow bundler to process new frame
@@ -1038,6 +1038,12 @@ void CALLBACK OnD3D11FrameRender(ID3D11Device* pd3dDevice, ID3D11DeviceContext* 
 			transformation = g_depthSensingRGBDSensor->getRigidTransform();
 			validTransform = true;
 		}
+
+    if (GlobalAppState::get().s_itmUsePoses && GlobalAppState::get().s_sensorIdx == 9) {
+      //overwrite transform and use given trajectory in this case
+      transformation = g_depthSensingRGBDSensor->getRigidTransform();
+      if(frameIdx != -1) validTransform = true;
+    }
 
 		if (GlobalAppState::getInstance().s_recordData) {
 			g_depthSensingRGBDSensor->recordFrame();
