@@ -26,18 +26,18 @@ public:
 	}
 
 	std::string getSensorName() const {
-    return "ITMSequenceReader";
+		return "ITMSequenceReader";
 	}
 
-  mat4f getRigidTransform() const;
+	mat4f getRigidTransform() const;
 
 	void stopReceivingFrames() { m_bIsReceivingFrames = false; }
 
 private:
-  int m_currentFrameNo;
-  std::string m_depthImageMask;
-  mat4f m_initialTransformInv;
-  std::string m_poseFileMask;
-  std::string m_rgbImageMask;
-  boost::filesystem::path m_sequenceDir;
+	int m_currentFrameNo;
+	std::string m_depthImageMask;
+	mat4f m_initialTransformInv;
+	std::string m_poseFileMask;
+	std::string m_rgbImageMask;
+	boost::filesystem::path m_sequenceDir;
 };

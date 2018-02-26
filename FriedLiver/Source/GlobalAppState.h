@@ -94,7 +94,7 @@
 	X(bool, s_recordCompression) \
 	X(std::string, s_recordDataFile) \
 	X(bool, s_reconstructionEnabled) \
-  X(bool, s_saveForInfiniTAM) \
+	X(bool, s_saveForInfiniTAM) \
 	X(bool, s_generateVideo) \
 	X(std::string, s_generateVideoDir) \
 	X(std::string, s_printTimingsDirectory) \
@@ -103,12 +103,12 @@
 	X(vec4f, s_topVideoCameraPose) \
 	X(vec2f, s_topVideoMinMax) \
 	X(unsigned int, s_numSolveFramesBeforeExit) \
-  X(std::string, s_itmDepthImageMask) \
-  X(int, s_itmInitialFrameNo) \
-  X(std::string, s_itmPoseFileMask) \
-  X(std::string, s_itmRgbImageMask) \
-  X(std::string, s_itmSequenceDir) \
-  X(bool, s_itmUsePoses)
+	X(std::string, s_itmDepthImageMask) \
+	X(int, s_itmInitialFrameNo) \
+	X(std::string, s_itmPoseFileMask) \
+	X(std::string, s_itmRgbImageMask) \
+	X(std::string, s_itmSequenceDir) \
+	X(bool, s_itmUsePoses)
 
 
 #ifndef VAR_NAME

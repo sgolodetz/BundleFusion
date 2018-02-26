@@ -26,13 +26,13 @@ namespace bf = boost::filesystem;
 
 static std::string get_iso_timestamp()
 {
-  boost::posix_time::ptime currentDateTime(boost::posix_time::second_clock::local_time());
-  return boost::posix_time::to_iso_string(currentDateTime);
+	boost::posix_time::ptime currentDateTime(boost::posix_time::second_clock::local_time());
+	return boost::posix_time::to_iso_string(currentDateTime);
 }
 
 std::string make_path(const bf::path& baseDir, const std::string& pattern, unsigned int index)
 {
-  return (baseDir / (boost::format(pattern) % index).str()).string();
+	return (baseDir / (boost::format(pattern) % index).str()).string();
 }
 
 RGBDSensor::RGBDSensor()
@@ -370,7 +370,7 @@ void RGBDSensor::recordFrame()
 
 void RGBDSensor::saveRecordedFramesToFile(const std::string& filename, const std::vector<mat4f>& trajectory, bool overwriteExistingFile /*= false*/)
 {
-  const bool saveForInfiniTAM = GlobalAppState::get().s_saveForInfiniTAM;
+	const bool saveForInfiniTAM = GlobalAppState::get().s_saveForInfiniTAM;
 
 	if (!saveForInfiniTAM && m_bUseModernSensFilesForRecording) {
 
@@ -494,66 +494,66 @@ void RGBDSensor::saveRecordedFramesToFile(const std::string& filename, const std
 
 		std::cout << "dumping recorded frames to " << actualFilename << " ...";
 
-    if (!saveForInfiniTAM) {
-		  BinaryDataStreamFile outStream(actualFilename, true);
-		  //BinaryDataStreamZLibFile outStream(filename, true);
-		  outStream << cs;
-		  std::cout << "done" << std::endl;
-    }
-    else {
-      const bf::path dumpDir("dump");
-      const bf::path sequenceDir = dumpDir / get_iso_timestamp();
-      bf::create_directories(sequenceDir);
-      for(unsigned int i = 0; i < numFrames; ++i)
-      {
-        const std::string depthFilename = make_path(sequenceDir, "frame-%06i.depth.png", i);
-        const std::string poseFilename = make_path(sequenceDir, "frame-%06i.pose.txt", i);
-        const std::string colourFilename = make_path(sequenceDir, "frame-%06i.color.png", i);
+		if (!saveForInfiniTAM) {
+			BinaryDataStreamFile outStream(actualFilename, true);
+			//BinaryDataStreamZLibFile outStream(filename, true);
+			outStream << cs;
+			std::cout << "done" << std::endl;
+		}
+		else {
+			const bf::path dumpDir("dump");
+			const bf::path sequenceDir = dumpDir / get_iso_timestamp();
+			bf::create_directories(sequenceDir);
+			for(unsigned int i = 0; i < numFrames; ++i)
+			{
+				const std::string depthFilename = make_path(sequenceDir, "frame-%06i.depth.png", i);
+				const std::string poseFilename = make_path(sequenceDir, "frame-%06i.pose.txt", i);
+				const std::string colourFilename = make_path(sequenceDir, "frame-%06i.color.png", i);
 
-        cv::Mat depthImage = cv::Mat::zeros(cs.m_ColorImageHeight, cs.m_ColorImageWidth, CV_16UC1);
-        const float *srcDepthImage = cs.m_DepthImages[i];
-        for(unsigned int y = 0; y < cs.m_DepthImageHeight; ++y)
-        {
-          unsigned short *row = depthImage.ptr<unsigned short>(y);
-          const float *srcRow = srcDepthImage + y * cs.m_DepthImageWidth;
-          for(unsigned int x = 0; x < cs.m_DepthImageWidth; ++x)
-          {
-            row[x] = static_cast<unsigned short>(srcRow[x] * 1000);
-          }
-        }
-        cv::imwrite(depthFilename, depthImage);
+				cv::Mat depthImage = cv::Mat::zeros(cs.m_ColorImageHeight, cs.m_ColorImageWidth, CV_16UC1);
+				const float *srcDepthImage = cs.m_DepthImages[i];
+				for(unsigned int y = 0; y < cs.m_DepthImageHeight; ++y)
+				{
+					unsigned short *row = depthImage.ptr<unsigned short>(y);
+					const float *srcRow = srcDepthImage + y * cs.m_DepthImageWidth;
+					for(unsigned int x = 0; x < cs.m_DepthImageWidth; ++x)
+					{
+						row[x] = static_cast<unsigned short>(srcRow[x] * 1000);
+					}
+				}
+				cv::imwrite(depthFilename, depthImage);
 
-        const ml::mat4f& pose = cs.m_trajectory[i];
-        {
-          std::ofstream fs(poseFilename.c_str());
+				const ml::mat4f& pose = cs.m_trajectory[i];
+				{
+					std::ofstream fs(poseFilename.c_str());
 
-          for(unsigned char y = 0; y < 4; ++y)
-          {
-            for(unsigned char x = 0; x < 4; ++x)
-            {
-              fs << pose.at(y,x) << ' ';
-            }
-            fs << '\n';
-          }
-        }
+					for(unsigned char y = 0; y < 4; ++y)
+					{
+						for(unsigned char x = 0; x < 4; ++x)
+						{
+							fs << pose.at(y,x) << ' ';
+						}
+						fs << '\n';
+					}
+				}
 
-        cv::Mat colourImage = cv::Mat::zeros(cs.m_ColorImageHeight, cs.m_ColorImageWidth, CV_8UC3);
-        const ml::vec4uc *srcColourImage = cs.m_ColorImages[i];
-        for(unsigned int y = 0; y < cs.m_ColorImageHeight; ++y)
-        {
-          cv::Vec3b *row = colourImage.ptr<cv::Vec3b>(y);
-          const ml::vec4uc *srcRow = srcColourImage + y * cs.m_ColorImageWidth;
-          for(unsigned int x = 0; x < cs.m_ColorImageWidth; ++x)
-          {
-            row[x][0] = srcRow[x].r;
-            row[x][1] = srcRow[x].g;
-            row[x][2] = srcRow[x].b;
-          }
-        }
-        cv::imwrite(colourFilename, colourImage);
-      }
-      std::cout << "done" << std::endl;
-    }
+				cv::Mat colourImage = cv::Mat::zeros(cs.m_ColorImageHeight, cs.m_ColorImageWidth, CV_8UC3);
+				const ml::vec4uc *srcColourImage = cs.m_ColorImages[i];
+				for(unsigned int y = 0; y < cs.m_ColorImageHeight; ++y)
+				{
+					cv::Vec3b *row = colourImage.ptr<cv::Vec3b>(y);
+					const ml::vec4uc *srcRow = srcColourImage + y * cs.m_ColorImageWidth;
+					for(unsigned int x = 0; x < cs.m_ColorImageWidth; ++x)
+					{
+						row[x][0] = srcRow[x].r;
+						row[x][1] = srcRow[x].g;
+						row[x][2] = srcRow[x].b;
+					}
+				}
+				cv::imwrite(colourFilename, colourImage);
+			}
+			std::cout << "done" << std::endl;
+		}
 
 		m_recordedDepthData.clear();
 		m_recordedColorData.clear();	//destructor of cs frees all allocated data

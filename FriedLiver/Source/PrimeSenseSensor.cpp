@@ -55,10 +55,10 @@ void PrimeSenseSensor::createFirstConnected()
 #if 0
 	rc = m_device.open("../data/readingroom.oni");//m_device.open(deviceURI);
 #else
-  // SMG
-  rc = m_device.open(deviceURI);
-  //rc = m_device.open("Lab.oni");
-  m_device.setDepthColorSyncEnabled(true);
+	// SMG
+	rc = m_device.open(deviceURI);
+	//rc = m_device.open("Lab.oni");
+	m_device.setDepthColorSyncEnabled(true);
 #endif
 	if (rc != openni::STATUS_OK)
 	{
@@ -73,11 +73,11 @@ void PrimeSenseSensor::createFirstConnected()
 	rc = m_depthStream.create(m_device, openni::SENSOR_DEPTH);
 	if (rc == openni::STATUS_OK)
 	{
-    openni::VideoMode mode;
-    mode.setFps(30);
-    mode.setPixelFormat(openni::PIXEL_FORMAT_DEPTH_1_MM);
-    mode.setResolution(640, 480);
-    m_depthStream.setVideoMode(mode);
+		openni::VideoMode mode;
+		mode.setFps(30);
+		mode.setPixelFormat(openni::PIXEL_FORMAT_DEPTH_1_MM);
+		mode.setResolution(640, 480);
+		m_depthStream.setVideoMode(mode);
 
 		rc = m_depthStream.start();
 		if (rc != openni::STATUS_OK)
@@ -95,11 +95,11 @@ void PrimeSenseSensor::createFirstConnected()
 	rc = m_colorStream.create(m_device, openni::SENSOR_COLOR);
 	if (rc == openni::STATUS_OK)
 	{
-    openni::VideoMode mode;
-    mode.setFps(30);
-    mode.setPixelFormat(openni::PIXEL_FORMAT_RGB888);
-    mode.setResolution(640, 480);
-    m_colorStream.setVideoMode(mode);
+		openni::VideoMode mode;
+		mode.setFps(30);
+		mode.setPixelFormat(openni::PIXEL_FORMAT_RGB888);
+		mode.setResolution(640, 480);
+		m_colorStream.setVideoMode(mode);
 
 		rc = m_colorStream.start();
 		if (rc != openni::STATUS_OK)
@@ -128,18 +128,18 @@ void PrimeSenseSensor::createFirstConnected()
 	//cs->setGain(1);
 	//cs->setExposure(10);
 
-  if(cs)
-  {
-	  std::cout << "getGain: " << cs->getGain() << std::endl;
-	  std::cout << "getExposure: " << cs->getExposure() << std::endl;
-	  std::cout << "getAutoExposureEnabled: " << cs->getAutoExposureEnabled() << std::endl;
-	  std::cout << "getAutoWhiteBalanceEnabled: " << cs->getAutoWhiteBalanceEnabled() << std::endl;
-  }
-  else
-  {
-    pc->setRepeatEnabled(false);
-    pc->setSpeed(-1);
-  }
+	if(cs)
+	{
+		std::cout << "getGain: " << cs->getGain() << std::endl;
+		std::cout << "getExposure: " << cs->getExposure() << std::endl;
+		std::cout << "getAutoExposureEnabled: " << cs->getAutoExposureEnabled() << std::endl;
+		std::cout << "getAutoWhiteBalanceEnabled: " << cs->getAutoWhiteBalanceEnabled() << std::endl;
+	}
+	else
+	{
+		pc->setRepeatEnabled(false);
+		pc->setSpeed(-1);
+	}
 
 	// Get Dimensions
 	m_depthVideoMode = m_depthStream.getVideoMode();
@@ -162,10 +162,10 @@ void PrimeSenseSensor::createFirstConnected()
 		return;
 	}
 
-  if(cs)
-  {
-	  m_device.setImageRegistrationMode(openni::IMAGE_REGISTRATION_DEPTH_TO_COLOR);
-  }
+	if(cs)
+	{
+		m_device.setImageRegistrationMode(openni::IMAGE_REGISTRATION_DEPTH_TO_COLOR);
+	}
 
 	float focalLengthX = (depthWidth / 2.0f) / tan(m_depthStream.getHorizontalFieldOfView() / 2.0f);
 	float focalLengthY = (depthHeight / 2.0f) / tan(m_depthStream.getVerticalFieldOfView() / 2.0f);
@@ -190,7 +190,7 @@ void PrimeSenseSensor::createFirstConnected()
 
 std::string PrimeSenseSensor::getSensorName() const
 {
-  return "PrimeSenseSensor";
+	return "PrimeSenseSensor";
 }
 
 bool PrimeSenseSensor::processDepth()
@@ -230,10 +230,10 @@ bool PrimeSenseSensor::readDepthAndColor(float* depthFloat, vec4uc* colorRGBX)
 		return false;	//no frame available
 	}
 #else
-  openni::Status rc = openni::OpenNI::waitForAnyStream(m_streams, 2, &changedIndex, 1000);
-  if (rc != openni::STATUS_OK) {
-    return false; // no frame available
-  }
+	openni::Status rc = openni::OpenNI::waitForAnyStream(m_streams, 2, &changedIndex, 1000);
+	if (rc != openni::STATUS_OK) {
+		return false; // no frame available
+	}
 #endif
 
 	openni::Status sd = m_depthStream.readFrame(&m_depthFrame);
